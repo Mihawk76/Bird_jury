@@ -1,12 +1,15 @@
 package com.example.daniel.bird_jury;
 
+import android.content.Intent;
 import android.content.res.Resources;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.PopupMenu;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
@@ -15,6 +18,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Intent intentExtras = getIntent();
+        Bundle extrasBundle = intentExtras.getExtras();
+        TextView loginName = (TextView) findViewById(R.id.textView2);
+        TextView jenisBurung = (TextView) findViewById(R.id.textView4);
+        if(extrasBundle != null){
+            loginName.setText(extrasBundle.getString("loginName","Haditama"));
+            jenisBurung.setText(extrasBundle.getString("jenisBurung", "Love Bird"));
+        }
+
         Button button1 = (Button) findViewById(R.id.button1);
         button1.setOnClickListener(this);
         Button button2 = (Button) findViewById(R.id.button2);

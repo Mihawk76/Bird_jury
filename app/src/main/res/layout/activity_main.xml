@@ -507,4 +507,24 @@
         app:layout_constraintStart_toStartOf="@id/textView"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginLeft="40dp" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Jenis Burung :"
+        app:layout_constraintEnd_toStartOf="@id/textView4"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="40dp"
+        android:layout_marginTop="16dp"
+        android:text="Love Bird"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginRight="80dp" />
 </android.support.constraint.ConstraintLayout>

@@ -1,3 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Bird_Jury</string>
+
+    <string-array name="nama_burung">
+            <item>Love Bird Sr</item>
+            <item>Love Bird jr</item>
+    </string-array>
 </resources>
