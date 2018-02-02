@@ -13,9 +13,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+    public Bird[] bird = new Bird[38];
+    public TextView rankBurung = (TextView) findViewById(R.id.textView5);;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        bird[0].setScore(1);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Intent intentExtras = getIntent();
@@ -26,10 +29,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             loginName.setText(extrasBundle.getString("loginName","Haditama"));
             jenisBurung.setText(extrasBundle.getString("jenisBurung", "Love Bird"));
         }
-
+        String combineButton;
+        for(int i=0;i<=48;i++)
+        {
+            combineButton = "button" + i;
+            bird[i].setName(combineButton);
+        }
         Button button1 = (Button) findViewById(R.id.button1);
         button1.setOnClickListener(this);
+//        bird[0].setName("button1");
         Button button2 = (Button) findViewById(R.id.button2);
+//        bird[1].setName("button2");
         button2.setOnClickListener(this);
         Button button3 = (Button) findViewById(R.id.button3);
         button3.setOnClickListener(this);
@@ -157,9 +167,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public boolean onMenuItemClick(MenuItem item) {
                 Toast.makeText(
                         MainActivity.this,
-                        "You Clicked : " + getResources().getResourceEntryName(v.getId()) + " " + item.getTitle(),
+                        "You Clicked : "
+                                + getResources().getResourceEntryName(v.getId())
+                                + " " + item.getTitle(),
                         Toast.LENGTH_SHORT
                 ).show();
+                for(int i = 0; i<=48; i++)
+                {
+                    if (bird[i].getName() == getResources().getResourceEntryName(v.getId()))
+                    {
+                        bird[i].addScore(1);
+                        rankBurung.setText("Nama burung" + bird[i].getName()
+                                + "Nilai: " + bird[i].getScore());
+                    }
+                }
                 return true;
             }
         });
