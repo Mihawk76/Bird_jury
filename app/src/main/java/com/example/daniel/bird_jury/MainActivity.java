@@ -1,5 +1,7 @@
 package com.example.daniel.bird_jury;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.support.v7.app.AppCompatActivity;
@@ -13,13 +15,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
-    public Bird[] bird = new Bird[38];
-    public TextView rankBurung = (TextView) findViewById(R.id.textView5);;
+    public Bird bird = new Bird();
+    public Context mContext;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        bird[0].setScore(1);
+//        Bird bird = new Bird();
+//        TextView rankBurung = (TextView) findViewById(R.id.textView5);
+//        bird.setScore(1,1);
         super.onCreate(savedInstanceState);
+        mContext = getApplicationContext();
         setContentView(R.layout.activity_main);
         Intent intentExtras = getIntent();
         Bundle extrasBundle = intentExtras.getExtras();
@@ -29,17 +35,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             loginName.setText(extrasBundle.getString("loginName","Haditama"));
             jenisBurung.setText(extrasBundle.getString("jenisBurung", "Love Bird"));
         }
-        String combineButton;
-        for(int i=0;i<=48;i++)
-        {
-            combineButton = "button" + i;
-            bird[i].setName(combineButton);
-        }
         Button button1 = (Button) findViewById(R.id.button1);
         button1.setOnClickListener(this);
-//        bird[0].setName("button1");
         Button button2 = (Button) findViewById(R.id.button2);
-//        bird[1].setName("button2");
         button2.setOnClickListener(this);
         Button button3 = (Button) findViewById(R.id.button3);
         button3.setOnClickListener(this);
@@ -160,7 +158,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(final View v){
         //put send data
+//        final Bird bird = new Bird();
+        String combineButton;
+        bird.setName(1, "Burung1");
+        for(int i=0;i<=48;i++)
+        {
+            combineButton = "button" + i;
+            bird.setName(i, combineButton);
+        }
         PopupMenu popup = new PopupMenu(MainActivity.this, v);
+//        TextView rankBurung = (TextView) ((Activity)mContext).findViewById(R.id.textView5);
+        final TextView rankBurung = (TextView) findViewById(R.id.textView5);
+
         popup.getMenuInflater()
                 .inflate(R.menu.popup_menu, popup.getMenu());
         popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
@@ -172,13 +181,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 + " " + item.getTitle(),
                         Toast.LENGTH_SHORT
                 ).show();
+//                rankBurung.setText("- -" + bird.getName(1) + "- -" + getResources().getResourceEntryName(v.getId()) + "- -");
+
+//                if (new String (bird.getName(1)).equals("button1")/*bird.getName(1) == getResources().getResourceEntryName(v.getId())*/)
+//                {
+//                    bird.addScore(1,1);
+//                    rankBurung.setText(bird.getName(1) + " " + getResources().getResourceEntryName(v.getId()));
+//
+//                }
                 for(int i = 0; i<=48; i++)
                 {
-                    if (bird[i].getName() == getResources().getResourceEntryName(v.getId()))
+                    if (new String (bird.getName(i)).equals(getResources().getResourceEntryName(v.getId())) )
                     {
-                        bird[i].addScore(1);
-                        rankBurung.setText("Nama burung" + bird[i].getName()
-                                + "Nilai: " + bird[i].getScore());
+                        bird.addScore(i,1);
+                        rankBurung.setText("Nama burung " + bird.getName(i)
+                                + " Nilai: " + bird.getScore(i));
                     }
                 }
                 return true;
